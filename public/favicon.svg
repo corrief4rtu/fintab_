@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Blue rounded square background -->
+  <rect width="512" height="512" rx="112" fill="#007AFF"/>
+
+  <g fill="white">
+    <!--
+      F letterform: vertical stroke + top arm + middle arm
+      traced from the user's reference logo (F with bar-chart bars)
+    -->
+    <path d="
+      M 80 68
+      L 408 68
+      Q 444 68 444 104
+      Q 444 174 404 183
+      L 164 180
+      L 164 236
+      L 318 236
+      Q 350 236 350 264
+      Q 350 292 318 292
+      L 164 292
+      L 164 324
+      L 80 324
+      Z
+    "/>
+
+    <!-- Bar chart: 3 bars at bottom-right, increasing height left→right -->
+    <!-- Bar 1 — shortest (leftmost, aligns with vertical stroke) -->
+    <rect x="164" y="352" width="56" height="98"  rx="9"/>
+    <!-- Bar 2 — medium -->
+    <rect x="242" y="312" width="56" height="138" rx="9"/>
+    <!-- Bar 3 — tallest (rightmost) -->
+    <rect x="320" y="264" width="56" height="186" rx="9"/>
+  </g>
+</svg>

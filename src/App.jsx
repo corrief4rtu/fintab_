@@ -21,13 +21,13 @@ const T_LIGHT = {
   shadow:"0 1px 4px rgba(0,0,0,0.06)", statusBg:"#FFFFFF", isDark:false,
 };
 const T_DARK = {
-  outer:"#000000", phone:"#1C1C1E", bg:"#1C1C1E", bg2:"#2C2C2E", bg3:"#000000",
-  card:"linear-gradient(135deg,#2C2C2E 0%,#3A3A3C 100%)",
-  text:"#FFFFFF", text2:"#8E8E93", text3:"#48484A",
-  border:"rgba(255,255,255,0.08)", border2:"rgba(255,255,255,0.06)",
+  outer:"#000000", phone:"#000000", bg:"#000000", bg2:"#1C1C1E", bg3:"#000000",
+  card:"linear-gradient(135deg,#1C1C1E 0%,#2C2C2E 100%)",
+  text:"#FFFFFF", text2:"#8E8E93", text3:"#3A3A3C",
+  border:"rgba(255,255,255,0.06)", border2:"rgba(255,255,255,0.04)",
   accent:"#0A84FF", green:"#30D158", red:"#FF453A", orange:"#FF9F0A",
-  tabbar:"rgba(28,28,30,0.96)", tabbarBorder:"rgba(255,255,255,0.07)",
-  shadow:"0 2px 8px rgba(0,0,0,0.5)", statusBg:"#1C1C1E", isDark:true,
+  tabbar:"rgba(0,0,0,0.96)", tabbarBorder:"rgba(255,255,255,0.08)",
+  shadow:"0 2px 12px rgba(0,0,0,0.8)", statusBg:"#000000", isDark:true,
 };
 const ThemeCtx = createContext(T_LIGHT);
 const useTheme = () => useContext(ThemeCtx);
@@ -128,7 +128,7 @@ const MONTH_NAMES  = ["January","February","March","April","May","June","July","
 const SHORT_MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const CURRENCIES   = ["AED","USD","EUR","GBP","RUB","KZT","TRY","SAR"];
 
-const DEFAULT_SETTINGS = { name:"Daniil", currency:"AED", monthlyBudgetLimit:12000, darkMode:false };
+const DEFAULT_SETTINGS = { name:"Guest", currency:"AED", monthlyBudgetLimit:12000, darkMode:false };
 const DEFAULT_BUDGETS  = [
   { category:"Food & Drink",  limit:2000 },
   { category:"Transport",     limit:500  },
@@ -1543,10 +1543,17 @@ export default function App() {
   const [detailTx,     setDetailTx]     = useState(null);
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const now = new Date();
+
+  const theme = isDark ? T_DARK : T_LIGHT;
+
+  // Keep body background in sync with theme so the area outside the app container matches
+  React.useEffect(() => {
+    document.body.style.background = theme.bg;
+    document.body.style.margin = "0";
+  }, [theme.bg]);
   const [curYear,  setCurYear]  = useState(now.getFullYear());
   const [curMonth, setCurMonth] = useState(now.getMonth());
 
-  const theme = isDark ? T_DARK : T_LIGHT;
   const mc    = (y,m) => { setCurYear(y); setCurMonth(m); };
   const addTx = tx  => setTransactions(p => [tx,...p]);
   const delTx = id  => setTransactions(p => p.filter(t=>t.id!==id));

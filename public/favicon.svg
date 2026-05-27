@@ -1,34 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Blue rounded square background -->
-  <rect width="512" height="512" rx="112" fill="#007AFF"/>
-
-  <g fill="white">
-    <!--
-      F letterform: vertical stroke + top arm + middle arm
-      traced from the user's reference logo (F with bar-chart bars)
-    -->
-    <path d="
-      M 80 68
-      L 408 68
-      Q 444 68 444 104
-      Q 444 174 404 183
-      L 164 180
-      L 164 236
-      L 318 236
-      Q 350 236 350 264
-      Q 350 292 318 292
-      L 164 292
-      L 164 324
-      L 80 324
-      Z
-    "/>
-
-    <!-- Bar chart: 3 bars at bottom-right, increasing height left→right -->
-    <!-- Bar 1 — shortest (leftmost, aligns with vertical stroke) -->
-    <rect x="164" y="352" width="56" height="98"  rx="9"/>
-    <!-- Bar 2 — medium -->
-    <rect x="242" y="312" width="56" height="138" rx="9"/>
-    <!-- Bar 3 — tallest (rightmost) -->
-    <rect x="320" y="264" width="56" height="186" rx="9"/>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="1024" rx="224" fill="white"/>
+  <g fill="#111111">
+    <path d="M347 238C347 205.967 372.967 180 405 180H704C721.673 180 736 194.327 736 212V251C736 268.673 721.673 283 704 283H457C446.507 283 438 291.507 438 302V383H660C677.673 383 692 397.327 692 415V452C692 469.673 677.673 484 660 484H438V654C438 700.944 399.944 739 353 739H347V238Z"/>
+    <path d="M347 632C347 596.654 375.654 568 411 568H441V654C441 702.601 401.601 742 353 742H347V632Z"/>
+    <rect x="470" y="650" width="50" height="92" rx="8"/>
+    <rect x="542" y="600" width="50" height="142" rx="8"/>
+    <rect x="614" y="540" width="50" height="202" rx="8"/>
   </g>
 </svg>

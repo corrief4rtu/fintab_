@@ -1554,27 +1554,22 @@ export default function App() {
   const delPl = id  => setPlans(p => p.filter(pl=>pl.id!==id));
 
   const cp = { transactions, year:curYear, month:curMonth, onMonthChange:mc, settings };
-  const clockH = String(now.getHours()).padStart(2,"0");
-  const clockM = String(now.getMinutes()).padStart(2,"0");
 
   return (
     <ThemeCtx.Provider value={theme}>
-      <div style={{ display:"flex", justifyContent:"center", alignItems:"center", minHeight:"100vh",
-        background:theme.outer, fontFamily:"-apple-system,'SF Pro Text',BlinkMacSystemFont,sans-serif" }}>
+      {/* Outer: fills viewport, shows theme color behind the app on desktop */}
+      <div style={{ background:theme.outer, minHeight:"100dvh",
+        fontFamily:"-apple-system,'SF Pro Text',BlinkMacSystemFont,sans-serif",
+        display:"flex", justifyContent:"center" }}>
 
-        <div style={{ width:390, height:844, background:theme.phone, borderRadius:44,
-          boxShadow:"0 40px 120px rgba(0,0,0,0.3)", overflow:"hidden", position:"relative",
-          display:"flex", flexDirection:"column" }}>
+        {/* App shell: full-width on phone, max 480px centered on desktop */}
+        <div style={{ width:"100%", maxWidth:480, minHeight:"100dvh",
+          background:theme.bg, display:"flex", flexDirection:"column",
+          position:"relative" }}>
 
-          {/* Status bar */}
-          <div style={{ background:theme.statusBg, padding:"13px 22px 7px",
-            display:"flex", justifyContent:"space-between", alignItems:"center", flexShrink:0 }}>
-            <span style={{ fontSize:14, fontWeight:600, color:theme.text }}>{clockH}:{clockM}</span>
-            <div style={{ width:110, height:13, background:theme.text, borderRadius:10, opacity:.9 }} />
-            <div style={{ display:"flex", gap:5, alignItems:"center", fontSize:11, color:theme.text }}>
-              <span>●●●</span><span>▶</span><span>🔋</span>
-            </div>
-          </div>
+          {/* iOS safe-area top (notch / Dynamic Island) */}
+          <div style={{ height:"env(safe-area-inset-top, 0px)",
+            background:theme.statusBg, flexShrink:0 }} />
 
           {/* Content */}
           <div style={{ flex:1, overflowY:"auto", scrollbarWidth:"none", background:theme.bg }}>
@@ -1586,16 +1581,18 @@ export default function App() {
             {activeTab==="settings"     && <SettingsScreen settings={settings} onUpdateSettings={setSettings} onClearData={()=>setTransactions([])} transactions={transactions} isDark={isDark} onToggleDark={()=>setIsDark(d=>!d)} onImport={txs=>setTransactions(p=>[...txs,...p])} onTutorial={()=>setTutorialOpen(true)} />}
           </div>
 
-          {/* Tab bar */}
+          {/* Tab bar — respects iOS home-indicator safe area at bottom */}
           <div style={{ background:theme.tabbar, backdropFilter:"blur(20px)",
-            borderTop:`1px solid ${theme.tabbarBorder}`, padding:"8px 0 16px",
+            borderTop:`1px solid ${theme.tabbarBorder}`,
+            paddingTop:8,
+            paddingBottom:"max(16px, env(safe-area-inset-bottom, 16px))",
             display:"flex", flexShrink:0 }}>
             {TABS.map(tab=>(
               <button key={tab.id} onClick={()=>setActiveTab(tab.id)}
                 style={{ flex:1, background:"none", border:"none", padding:"3px 0", cursor:"pointer",
                   display:"flex", flexDirection:"column", alignItems:"center", gap:2 }}>
-                <span style={{ fontSize:18, filter:activeTab===tab.id?"none":"grayscale(1) opacity(0.4)" }}>{tab.icon}</span>
-                <span style={{ fontSize:9, fontWeight:activeTab===tab.id?600:400,
+                <span style={{ fontSize:22, filter:activeTab===tab.id?"none":"grayscale(1) opacity(0.4)" }}>{tab.icon}</span>
+                <span style={{ fontSize:10, fontWeight:activeTab===tab.id?600:400,
                   color:activeTab===tab.id?theme.accent:theme.text2 }}>{tab.label}</span>
               </button>
             ))}
